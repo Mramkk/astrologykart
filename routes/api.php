@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\User_ApiController;
 // use App\Http\Controllers\Api\Video_ApiController;
 // use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Api\Mix_ApiController;
+use App\Http\Controllers\Api\Post\ApiPostController;
 use App\Http\Controllers\Api\Slider\ApiSliderController;
 use App\Http\Controllers\Api\User\ApiUserController;
 
@@ -101,6 +102,13 @@ Route::controller(ApiHoroscopeController::class)->group(function () {
     Route::get('/horoscope/data', 'data');
 });
 
+// slider 
 Route::controller(ApiSliderController::class)->group(function () {
     Route::get('/slider/data', 'data');
+});
+
+// blogs 
+Route::controller(ApiPostController::class)->group(function () {
+    Route::get('/post/data', 'data');
+    Route::get('/post/data/category/{category}', 'dataByCategory');
 });
