@@ -1,0 +1,170 @@
+.del_icon_btn {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 2.5rem;
+    margin-left: 3.5rem;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    font-size: 1.7rem;
+    padding: 0;
+    line-height: 0;
+}
+
+.astro-container {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 8px #ccc;
+    border-radius: 10px;
+    margin: 0;
+    margin-bottom: 22px;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 8px;
+
+}
+
+.astro-container:hover {
+    box-shadow: 0 0 15px #ccc;
+}
+
+.astro-image {
+    border-radius: 50%;
+    border: 1px solid #eee;
+    width: 100%;
+    max-width: 80px;
+}
+
+.astro-name {
+    display: block;
+    font-size: 16px;
+    text-transform: capitalize;
+    padding-top: 5px;
+}
+
+.astro-price {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.astro-txt {
+    display: block;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #7a7a7a;
+}
+
+.astro-btn {
+    float: right;
+    margin-right: 10px;
+    margin-top: -8px;
+    line-height: 0;
+    padding: 15px 30px;
+    display: block;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .3s ease-in-out;
+    outline: none;
+    font-weight: 600;
+    color: #eb0029;
+    background-color: #fff;
+    border: 1px solid #eb0029;
+}
+
+.astro-btn.online {
+    color: #28ba51;
+    border: 1px solid #28ba51;
+}
+
+.astro-btn.recharge {
+    background-color: #28ba51;
+    color: #ffffff;
+    border: 1px solid #28ba51;
+}
+
+.astro-btn.recharge:hover {
+    background-color: #ffffff;
+    color: #28ba51;
+    border: 1px solid #28ba51;
+}
+
+.astro-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.astro-rating {
+    color: #5c5c5c;
+    padding: 5px 0;
+    font-weight: 600;
+    display: block;
+}
+
+.action-box {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.verifeid-icon {
+    height: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.price-free {
+    color: #d11500 !important;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.page-content {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+    font-family: var(--font-poppins);
+    font-weight: 400;
+    color: #1f1f1f;
+}
+
+.page-content li {
+    list-style-type: disc;
+    font-weight: 500;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 1.6;
+}
+
+.page-content h2 {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.page-content p {
+    text-align: justify;
+    color: #1d1d1d;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+
+
