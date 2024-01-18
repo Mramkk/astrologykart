@@ -26,11 +26,6 @@ class ApiAstrologerController extends Controller
                 return ApiRes::error();
             }
         } else {
-            // $astro = Astrologer::select('*')
-            //     ->where('id', '>', $req->id)
-            //     // ->latest()
-            //     ->limit(6)
-            //     ->get();
             $astro = Astrologer::latest()
                 ->where('id', '<', $req->id)
                 ->limit(6)
@@ -277,8 +272,6 @@ class ApiAstrologerController extends Controller
             if ($req->hasFile('image')) {
                 $name =  uniqid() . ".webp";
                 $path = 'assets/img/astrologer/';
-
-
                 $astro = Astrologer::where('id', auth()->user()->id)->first();
                 if ($astro->image != null) {
                     unlink($path . $astro->image);
