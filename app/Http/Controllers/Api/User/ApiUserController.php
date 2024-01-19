@@ -6,6 +6,7 @@ use App\Helpers\ApiRes;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SmsController;
 use App\Models\Astrologer;
+use App\Models\Payment;
 use App\Models\User;
 use App\Models\Userdetail;
 use Illuminate\Http\Request;
@@ -247,5 +248,13 @@ class ApiUserController extends Controller
         } catch (\Throwable $th) {
             return ApiRes::failed($th);
         }
+    }
+
+    public function payment_history(Request $req)
+    {
+        $uid = auth()->user()->uid;
+        $user = Userdetail::where('uid', $uid)->first();
+        $payments = Payment::where('uid',$uid)->orderBy('id','DESC')->take(50)->get();
+        return ApiRes::data('Payment History', ['user' => $user, 'payments' => $payments]);
     }
 }
