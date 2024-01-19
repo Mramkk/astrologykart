@@ -110,5 +110,5 @@ Route::controller(ApiSliderController::class)->group(function () {
 // blogs 
 Route::controller(ApiPostController::class)->group(function () {
     Route::get('/post/data', 'data');
-    Route::get('/post/data/category/{category}', 'dataByCategory');
+    Route::get('/post/data/category', 'dataByCategory');
 });
