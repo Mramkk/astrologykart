@@ -70,6 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/user/update', 'update');
         Route::post('/user/image', 'imgUpload');
         Route::get('/user/payment-history', 'payment_history');
+        Route::get('/user/add-wallet-money', 'recharge_page');
         Route::post('/user/logout', 'logout');
     });
     Route::controller(ApiChatController::class)->group(function () {

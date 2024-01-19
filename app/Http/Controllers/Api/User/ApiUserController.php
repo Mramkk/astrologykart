@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\SmsController;
 use App\Models\Astrologer;
 use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\User;
 use App\Models\Userdetail;
 use Illuminate\Http\Request;
@@ -256,5 +257,14 @@ class ApiUserController extends Controller
         $user = Userdetail::where('uid', $uid)->first();
         $payments = Payment::where('uid',$uid)->orderBy('id','DESC')->take(50)->get();
         return ApiRes::data('Payment History', ['user' => $user, 'payments' => $payments]);
+    }
+
+    public function recharge_page(Request $req)
+    {
+        $uid = auth()->user()->uid;
+        $user = Userdetail::where('uid', $uid)->first();
+        $recharge = Plan::orderBy('amount','ASC')->get();
+        // $recharge = [50,100,200,300,500,1000,2000,3000,4000,8000,15000,20000,50000,100000];
+        return ApiRes::data('Recharge Page', ['user' => $user, 'recharge' => $recharge]);
     }
 }
