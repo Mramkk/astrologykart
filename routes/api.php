@@ -69,6 +69,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user/data', 'data');
         Route::post('/user/update', 'update');
         Route::post('/user/image', 'imgUpload');
+        Route::get('/user/payment-history', 'payment_history');
+        Route::get('/user/add-wallet-money', 'recharge_page');
         Route::post('/user/logout', 'logout');
     });
     Route::controller(ApiChatController::class)->group(function () {
@@ -114,5 +116,5 @@ Route::controller(ApiSliderController::class)->group(function () {
 // blogs
 Route::controller(ApiPostController::class)->group(function () {
     Route::get('/post/data', 'data');
-    Route::get('/post/data/category/{category}', 'dataByCategory');
+    Route::get('/post/data/category', 'dataByCategory');
 });

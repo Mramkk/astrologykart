@@ -11,7 +11,7 @@ class ApiSliderController extends Controller
 {
     public function data() 
     {
-        $data = Slider::where('status', 1)->orderBy('serial_no', 'asc')->get();
+        $data = Slider::where('status', 1)->orderBy('serial_no', 'asc')->paginate(5);
         return ApiRes::data('All Slider', $data);
     }
 }
