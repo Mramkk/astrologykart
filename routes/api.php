@@ -76,6 +76,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/chat/data', 'data');
         Route::get('/chat/receiver', 'receiver');
     });
+
+    Route::controller(ApiUserController::class)->group(function () {
+        Route::post('/user/mlogout', 'logout');
+    });
 });
 
 // Register & Login Api
@@ -102,12 +106,12 @@ Route::controller(ApiHoroscopeController::class)->group(function () {
     Route::get('/horoscope/data', 'data');
 });
 
-// slider 
+// slider
 Route::controller(ApiSliderController::class)->group(function () {
     Route::get('/slider/data', 'data');
 });
 
-// blogs 
+// blogs
 Route::controller(ApiPostController::class)->group(function () {
     Route::get('/post/data', 'data');
     Route::get('/post/data/category/{category}', 'dataByCategory');

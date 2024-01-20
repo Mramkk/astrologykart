@@ -17,6 +17,7 @@ class ApiPostController extends Controller
 
     public function dataByCategory(Request $req)
     {
+        
         $data = Post::where('status', 1)->where('category', $req->category)->orderBy('id', 'desc')->limit(1)->get();
         return ApiRes::data('Category Post', $data);
     }
