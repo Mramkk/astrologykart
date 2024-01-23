@@ -9,10 +9,31 @@ use Illuminate\Http\Request;
 
 class ApiPostController extends Controller
 {
-    public function data()
+    public function data(Request $req)
     {
-        $data = Post::where('status', 1)->orderBy('id', 'desc')->paginate(5);
-        return ApiRes::data('All Post', $data);
+        // $data = Post::where('status', 1)->orderBy('id', 'desc')->paginate(5);
+        // return ApiRes::data('All Post', $data);
+
+        if ($req->id == null || $req->id == "") {
+
+            $data = Post::latest()->limit(6)->get();
+
+            if ($data) {
+                return ApiRes::data("Datalist", $data);
+            } else {
+                return ApiRes::error();
+            }
+        } else {
+            $astro = Post::latest()
+                ->where('id', '<', $req->id)
+                ->limit(6)
+                ->get();
+            if ($astro) {
+                return ApiRes::data("Datalist", $astro);
+            } else {
+                return ApiRes::error();
+            }
+        }
     }
 
     public function dataByCategory(Request $req)
