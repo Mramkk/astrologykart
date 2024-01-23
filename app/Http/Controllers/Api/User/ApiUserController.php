@@ -253,18 +253,26 @@ class ApiUserController extends Controller
 
     public function payment_history(Request $req)
     {
-        $uid = auth()->user()->uid;
-        $user = Userdetail::where('uid', $uid)->first();
-        $payments = Payment::where('uid',$uid)->orderBy('id','DESC')->take(50)->get();
-        return ApiRes::data('Payment History', ['user' => $user, 'payments' => $payments]);
+        try {
+            $uid = auth()->user()->uid;
+            $user = Userdetail::where('uid', $uid)->first();
+            $payments = Payment::where('uid', $uid)->orderBy('id', 'DESC')->take(50)->get();
+            return ApiRes::data('Payment History', ['user' => $user, 'payments' => $payments]);
+        } catch (\Throwable $th) {
+            return ApiRes::failed($th);
+        }
     }
 
     public function recharge_page(Request $req)
     {
-        $uid = auth()->user()->uid;
-        $user = Userdetail::where('uid', $uid)->first();
-        $recharge = Plan::orderBy('amount','ASC')->get();
-        // $recharge = [50,100,200,300,500,1000,2000,3000,4000,8000,15000,20000,50000,100000];
-        return ApiRes::data('Recharge Page', ['user' => $user, 'recharge' => $recharge]);
+        try {
+            $uid = auth()->user()->uid;
+            $user = Userdetail::where('uid', $uid)->first();
+            $recharge = Plan::orderBy('amount', 'ASC')->get();
+            // $recharge = [50,100,200,300,500,1000,2000,3000,4000,8000,15000,20000,50000,100000];
+            return ApiRes::data('Recharge Page', ['user' => $user, 'recharge' => $recharge]);
+        } catch (\Throwable $th) {
+            return ApiRes::failed($th);
+        }
     }
 }
