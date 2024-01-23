@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ApiSliderController extends Controller
 {
-    public function data() 
+    public function data()
     {
-        $data = Slider::where('status', 1)->orderBy('serial_no', 'asc')->paginate(5);
+        $data = Slider::where('status', 1)->orderBy('serial_no', 'asc')->get();
         return ApiRes::data('All Slider', $data);
     }
 }
