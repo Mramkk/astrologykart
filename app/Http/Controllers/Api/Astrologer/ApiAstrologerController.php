@@ -18,7 +18,7 @@ class ApiAstrologerController extends Controller
     {
         if ($req->id == null || $req->id == "") {
 
-            $data = Astrologer::latest()->limit(10)->get();
+            $data = Astrologer::latest()->limit(20)->get();
 
             if ($data) {
                 return ApiRes::data("Astrologer List", $data);
