@@ -25,11 +25,12 @@ class ApiHoroscopeController extends Controller
 
     public function horoscope($sign)
     {
+        $date = date('Y-m-d');
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://ohmanda.com/api/horoscope/' . $sign,
+            CURLOPT_URL => 'https://newastro.vercel.app/' . $sign . '?date=' . $date . '&lang=en',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -39,7 +40,6 @@ class ApiHoroscopeController extends Controller
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
                 'Accept: application/json',
-
             ),
         ));
 
@@ -47,5 +47,27 @@ class ApiHoroscopeController extends Controller
 
         curl_close($curl);
         return $response;
+
+        // $curl = curl_init();
+
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://ohmanda.com/api/horoscope/' . $sign,
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'GET',
+        //     CURLOPT_HTTPHEADER => array(
+        //         'Accept: application/json',
+
+        //     ),
+        // ));
+
+        // $response = curl_exec($curl);
+
+        // curl_close($curl);
+        // return $response;
     }
 }
