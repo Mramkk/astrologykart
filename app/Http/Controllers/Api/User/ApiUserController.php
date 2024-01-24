@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Helpers\ApiRes;
+use App\Helpers\Classes\EasyData;
+use App\Http\Controllers\Api\Wallet_ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SmsController;
 use App\Models\Astrologer;
@@ -274,5 +276,24 @@ class ApiUserController extends Controller
         } catch (\Throwable $th) {
             return ApiRes::failed($th);
         }
+    }
+
+    public function store(Request $request)
+    {
+        if ($request->action == 'CREATE_PAYMENT') {
+            $ob = new Wallet_ApiController;
+            $data = $ob->store($request);
+            return $data;
+        }
+
+        if ($request->action == 'GET_PAYMENT') {
+            $ob = new Wallet_ApiController;
+            $data = $ob->store($request);
+            return $data;
+        }
+
+        $ob = new EasyData;
+        $ob->message('Invalid Action Type');
+        return $ob->json_output();
     }
 }
