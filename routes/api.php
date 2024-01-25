@@ -14,6 +14,8 @@ use App\Http\Controllers\Api\User_ApiController;
 // use App\Http\Controllers\Api\Video_ApiController;
 // use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Api\Mix_ApiController;
+use App\Http\Controllers\Api\Payment\ApiPaymentController;
+use App\Http\Controllers\Api\Plan\ApiPlanController;
 use App\Http\Controllers\Api\Post\ApiPostController;
 use App\Http\Controllers\Api\Slider\ApiSliderController;
 use App\Http\Controllers\Api\User\ApiUserController;
@@ -79,10 +81,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/chat/data', 'data');
         Route::get('/chat/receiver', 'receiver');
     });
-
-    Route::controller(ApiUserController::class)->group(function () {
-        Route::post('/user/mlogout', 'logout');
+    Route::controller(ApiPlanController::class)->group(function () {
+        Route::get('/plan', 'data');
     });
+    Route::controller(ApiPaymentController::class)->group(function () {
+        Route::get('/payment/generate-order', 'generateOrder');
+        Route::post('/payment', 'payment');
+    });
+
+    // Route::controller(ApiUserController::class)->group(function () {
+    //     Route::post('/user/mlogout', 'logout');
+    // });
 });
 
 // Register & Login Api

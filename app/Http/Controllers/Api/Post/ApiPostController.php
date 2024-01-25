@@ -16,7 +16,7 @@ class ApiPostController extends Controller
 
         if ($req->id == null || $req->id == "") {
 
-            $data = Post::latest()->limit(20)->get();
+            $data = Post::latest()->limit(6)->get();
 
             if ($data) {
                 return ApiRes::data("Datalist", $data);
