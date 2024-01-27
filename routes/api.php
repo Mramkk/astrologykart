@@ -105,7 +105,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/post/data/category', 'dataByCategory');
     });
 
-
+    // Horoscope
+    Route::controller(ApiHoroscopeController::class)->group(function () {
+        Route::get('/horoscope/data', 'data');
+    });
     // Route::controller(ApiUserController::class)->group(function () {
     //     Route::post('/user/mlogout', 'logout');
     // });
@@ -130,7 +133,4 @@ Route::controller(ApiAstrologerController::class)->group(function () {
 Route::controller(ApiUserController::class)->group(function () {
     Route::post('/user/send-otp', 'sendOtp');
     Route::post('/user/verify-otp', 'verifyOtp');
-});
-Route::controller(ApiHoroscopeController::class)->group(function () {
-    Route::get('/horoscope/data', 'data');
 });
