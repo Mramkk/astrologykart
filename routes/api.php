@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Mix_ApiController;
 use App\Http\Controllers\Api\Payment\ApiPaymentController;
 use App\Http\Controllers\Api\Plan\ApiPlanController;
 use App\Http\Controllers\Api\Post\ApiPostController;
+use App\Http\Controllers\Api\Recharge\ApiRechargeController;
 use App\Http\Controllers\Api\Slider\ApiSliderController;
 use App\Http\Controllers\Api\User\ApiUserController;
 
@@ -85,9 +86,25 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/plan', 'data');
     });
     Route::controller(ApiPaymentController::class)->group(function () {
+        Route::get('/payment', 'data');
         Route::get('/payment/generate-order', 'generateOrder');
-        Route::post('/payment', 'payment');
+        Route::post('/payment/fetch', 'paymentFetch');
     });
+    Route::controller(ApiRechargeController::class)->group(function () {
+        Route::get('/recharge', 'data');
+    });
+
+    // slider
+    Route::controller(ApiSliderController::class)->group(function () {
+        Route::get('/slider/data', 'data');
+    });
+
+    // blogs
+    Route::controller(ApiPostController::class)->group(function () {
+        Route::get('/post/data', 'data');
+        Route::get('/post/data/category', 'dataByCategory');
+    });
+
 
     // Route::controller(ApiUserController::class)->group(function () {
     //     Route::post('/user/mlogout', 'logout');
@@ -116,15 +133,4 @@ Route::controller(ApiUserController::class)->group(function () {
 });
 Route::controller(ApiHoroscopeController::class)->group(function () {
     Route::get('/horoscope/data', 'data');
-});
-
-// slider
-Route::controller(ApiSliderController::class)->group(function () {
-    Route::get('/slider/data', 'data');
-});
-
-// blogs
-Route::controller(ApiPostController::class)->group(function () {
-    Route::get('/post/data', 'data');
-    Route::get('/post/data/category', 'dataByCategory');
 });

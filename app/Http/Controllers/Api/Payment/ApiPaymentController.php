@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Payment;
 use App\Helpers\ApiRes;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\Plan;
+use App\Models\Recharge;
 use App\Models\Userdetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +14,17 @@ use Razorpay\Api\Api;
 
 class ApiPaymentController extends Controller
 {
+
+    public function data()
+    {
+        try {
+            $data = Payment::latest()->where('uid', auth()->user()->uid)->get();
+            return ApiRes::data("Datalist", $data);
+        } catch (\Throwable $th) {
+            return ApiRes::failed($th->getMessage());
+            // return ApiRes::error();
+        }
+    }
     public function generateOrder(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -50,16 +63,19 @@ class ApiPaymentController extends Controller
             // return ApiRes::error();
         }
     }
-    public function payment(Request $req)
+    public function paymentFetch(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'payment_id' => 'required|string',
+            'plan_id' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             if ($errors->first('payment_id')) {
                 return ApiRes::failed($errors->first('payment_id'));
+            } elseif ($errors->first('plan_id')) {
+                return ApiRes::failed($errors->first('plan_id'));
             }
         }
         try {
@@ -81,6 +97,19 @@ class ApiPaymentController extends Controller
             $payment->payment_type = 'recharge';
             $payment->status = $pay->status;
             $payment->save();
+            $plan = Plan::where('id', $req->plan_id)->first();
+            $user = Userdetail::where('uid', $req->user()->uid)->first();
+            $extraSum = ($plan->extra / $plan->amount) * 100;
+            $amtSum = $plan->amount + $extraSum;
+            $user->balance = $user->balance + $amtSum;
+            $user->save();
+            $recharge = new Recharge();
+            $recharge->uid = $req->user()->uid;
+            $recharge->plan_id = $req->plan_id;
+            $recharge->amount = ($pay->amount / 100);
+            $recharge->extra = $extraSum;
+            $recharge->status = $pay->captured == true ? 1 : 0;
+            $recharge->save();
             return ApiRes::success('Payment successfully !');
         } catch (\Throwable $th) {
             return ApiRes::failed($th->getMessage());
