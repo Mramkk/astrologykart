@@ -1,1 +1,0 @@
-<a class="btn btn-sm fs-4 px-3 btn-outline-secondary view__btn" href="{{route($route_name.'.show',$data->id)}}">View</a>
